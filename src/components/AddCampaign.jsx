@@ -84,10 +84,7 @@ export default function AddCampaign({ onClose }) {
 
     };
 
-    const userOptions = Object.entries(users).map(([id, name]) => (
-        <option key={id} value={id}>{name}</option>
-    ));
-
+   
     return (
         <div>
             <h1>Add Campaign</h1>
@@ -139,14 +136,6 @@ export default function AddCampaign({ onClose }) {
                 </div>
                 <div>
                     <label htmlFor="camp-user">User Name</label>
-                    {/* <select
-                        id="camp-user"
-                        value={formData.userId}
-                        onChange={(e) => handleChange('userId', e.target.value)}
-                    >
-                        <option value="">Select User..</option>
-                        {userOptions}
-                    </select> */}
                     <input
                         id="user-name"
                         type="number"
