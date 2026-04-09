@@ -1,0 +1,20 @@
+th {
+    background-color: blue;
+}
+
+ .red {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: red;
+}
+ .green {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: green;
+}
+
+.active{
+    display: flex;
+}
