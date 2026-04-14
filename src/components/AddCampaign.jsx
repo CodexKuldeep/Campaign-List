@@ -5,12 +5,14 @@ import './AddCampaign.css'
 import Button from "@mui/material/Button";
 
 import TextField from "@mui/material/TextField";
-import { Link, useNavigate } from "react-router-dom";
+// import { Link, useNavigate } from "react-router-dom";
 
 
-export default function AddCampaign() {
+export default function AddCampaign({ onClose }) {
+
+
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const campaigns = useSelector(state => state.campaigns.items);
 
 
@@ -83,90 +85,101 @@ export default function AddCampaign() {
         }
 
         dispatch(addCampaigns([newCampaign]));
-        navigate("/")
+        onClose();
+        // navigate("/")
 
     };
 
+    function isFilled() {
+        if (formData.name === '' || formData.Budget === '' || formData.startDate === '' || formData.endDate === '') {
+            return true;
+        }
+    }
 
     return (
         <div className="add-container">
-            <h2>Add Campaign</h2>
-            <form onSubmit={handleSubmit}>
-                <div className="input-field">
-                    <TextField
-                        className="txt"
-                        error={errors.name}
-                        id="outlined-error-helper-text"
-                        label="Camp Name"
-                        helperText={errors.name}
-                        type="text"
-                        placeholder="Enter Campaign name"
-                        value={formData.name}
-                        onChange={(e) => handleChange('name', e.target.value)}
-                    />
-                    <label htmlFor="">Start Date</label>
-                    <TextField
-                        className="txt"
-                        error={errors.startDate}
-                        id="outlined-error-helper-text"
-                        // label="Camp Name"
-                        helperText={errors.startDate}
-                        variant="outlined"
-                        type="date"
-                        value={formData.startDate}
-                        onChange={(e) => handleChange('startDate', e.target.value)} />
-                    <label htmlFor="">End Date</label>
-                    <TextField
-                        className="txt"
-                        error={errors.endDate}
-                        id="outlined-error-helper-text"
-                        helperText={errors.endDate}
-                        variant="outlined"
-                        type="date"
+            <div className="add-content">
+                <h2>Add Campaign</h2>
+                <form onSubmit={handleSubmit}>
+                    <div className="input-field">
+                        <TextField
+                            className="txt"
+                            error={errors.name}
+                            id="outlined-error-helper-text"
+                            label="Camp Name"
+                            helperText={errors.name}
+                            type="text"
+                            placeholder="Enter Campaign name"
+                            value={formData.name}
+                            onChange={(e) => handleChange('name', e.target.value)}
+                        />
+                        <label htmlFor="">Start Date</label>
+                        <TextField
+                            className="txt"
+                            error={errors.startDate}
+                            id="outlined-error-helper-text"
+                            // label="Camp Name"
+                            helperText={errors.startDate}
+                            variant="outlined"
+                            type="date"
+                            value={formData.startDate}
+                            onChange={(e) => handleChange('startDate', e.target.value)} />
+                        <label htmlFor="">End Date</label>
+                        <TextField
+                            className="txt"
+                            error={errors.endDate}
+                            id="outlined-error-helper-text"
+                            helperText={errors.endDate}
+                            variant="outlined"
+                            type="date"
 
-                        value={formData.endDate}
-                        onChange={(e) => handleChange('endDate', e.target.value)} />
-                    <TextField
-                        className="txt"
-                        error={errors.Budget}
-                        id="outlined-error-helper-text"
-                        helperText={errors.Budget}
-                        label="Camp Budget"
-                        variant="outlined"
-                        type="number"
-                        placeholder="Enter Budget"
-                        value={formData.Budget}
-                        onChange={(e) => handleChange('Budget', e.target.value)}
-                    />
-                    <TextField
-                        className="txt"
-                        id="outlined-basic"
-                        label="User Id"
-                        variant="outlined"
-                        type="number"
-                        placeholder="Enter User Id"
-                        value={formData.userId}
-                        onChange={(e) => handleChange('userId', e.target.value)}
-                    />
-                </div>
-                <div >
-                    <Link to="/">
+                            value={formData.endDate}
+                            onChange={(e) => handleChange('endDate', e.target.value)} />
+                        <TextField
+                            className="txt"
+                            error={errors.Budget}
+                            id="outlined-error-helper-text"
+                            helperText={errors.Budget}
+                            label="Camp Budget"
+                            variant="outlined"
+                            type="number"
+                            placeholder="Enter Budget"
+                            value={formData.Budget}
+                            onChange={(e) => handleChange('Budget', e.target.value)}
+                        />
+                        <TextField
+                            className="txt"
+                            id="outlined-basic"
+                            label="User Id"
+                            variant="outlined"
+                            type="number"
+                            placeholder="Enter User Id"
+                            value={formData.userId}
+                            onChange={(e) => handleChange('userId', e.target.value)}
+                        />
+                    </div>
+                    <div >
+                        {/* <Link to="/"> */}
                         <Button
                             variant="outlined"
                             color="error"
-                            type='button' >
+                            type='button'
+                            onClick={onClose}>
                             Cancel
                         </Button>
-                    </Link>
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button
-                        variant="contained"
-                        color="success"
-                        type="submit">
-                        Add Campaign
-                    </Button>
-                </div>
-            </form>
+                        {/* </Link> */}
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <Button
+                            variant="contained"
+                            color="success"
+                            type="submit"
+                            disabled={isFilled()}
+                        >
+                            Add Campaign
+                        </Button>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 

@@ -9,8 +9,8 @@ import Root from './Root.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Provider store={store}>
-    {/* <App /> */}
-    <Root />
+    <App />
+    {/* <Root /> */}
     </Provider>
   </StrictMode>,
 )

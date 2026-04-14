@@ -1,8 +1,28 @@
 .add-container{
-  display: flex;
-  flex-direction: column;
+  position: fixed;
+  height: 100%;
   width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(150, 185, 210, 0.6);
+ 
+  /* border: 2px solid black; */
+  display: flex;
+  justify-content: center;
   align-items: center;
+ 
+  z-index: 1000;
+}
+.add-content{
+  /* background: var(--bg-card); */
+  width: 90%;
+  background-color: rgb(175, 214, 233);
+  max-width: 600px;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgb(49, 70, 85);
+  padding: 32px;
+  position: relative;
+  /* border: 1px solid var(--border); */
 }
 
 label {
@@ -17,7 +37,7 @@ label {
 .input-field{
  display: flex;
  flex-direction: column;
- /* width: 50%; */
+ width: 60%;
 /* align-items: center; */
 /* /margin-bottom: 2px; */
 }

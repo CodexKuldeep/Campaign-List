@@ -125,13 +125,13 @@ export default function List() {
             <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <TableCell>Campaign name</TableCell>
-            <TableCell align="right">User Name</TableCell>
-            <TableCell align="right">Start Date</TableCell>
-            <TableCell align="right">End date</TableCell>
-            <TableCell align="right">Active</TableCell>
-            <TableCell align="right">Budget</TableCell>
+          <TableRow >
+            <TableCell ><span className="head" >Campaign name</span></TableCell>
+            <TableCell align="right"><span className="head" >User Name</span></TableCell>
+            <TableCell align="right"><span className="head" >Start Date</span></TableCell>
+            <TableCell align="right"><span className="head" >End date</span></TableCell>
+            <TableCell align="right"><span className="head" >Active</span></TableCell>
+            <TableCell align="right"><span className="head" >Budget</span></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
