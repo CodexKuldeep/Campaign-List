@@ -25,11 +25,7 @@
 .search-input{
   width: 80%;
   padding: 0.65rem 0.85rem;
-  /* border: 1px solid #3d4155; */
-  border-radius: 6px;
-  /* background-color: #1e2130; */
-
-  
+   border-radius: 6px;  
 }
 
 
