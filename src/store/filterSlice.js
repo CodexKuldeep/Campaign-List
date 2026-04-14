@@ -5,7 +5,7 @@ const filterSlice = createSlice({
     initialState: {
         name: '',
         startDate: null,
-        endData: null
+        endDate: null
     },
     reducers: {
         changeName(state,action){
@@ -15,7 +15,7 @@ const filterSlice = createSlice({
             state.startDate = action.payload;
         },
         changeEndDate(state,action){
-            state.endData = action.payload;
+            state.endDate = action.payload;
         }
     }
 })

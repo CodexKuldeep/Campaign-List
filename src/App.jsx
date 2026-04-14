@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "./store/usersSlice";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import './App.css'
 
 export default function App() {
   const dispatch = useDispatch();
@@ -26,8 +27,8 @@ export default function App() {
         </h1>
         <Link to="/add">
           <Button
+          id="btn"
             variant="contained"
-
           >
             Add Campaign
           </Button>

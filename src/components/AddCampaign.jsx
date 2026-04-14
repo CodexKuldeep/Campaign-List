@@ -90,10 +90,11 @@ export default function AddCampaign() {
 
     return (
         <div className="add-container">
-            <h1>Add Campaign</h1>
+            <h2>Add Campaign</h2>
             <form onSubmit={handleSubmit}>
                 <div className="input-field">
                     <TextField
+                        className="txt"
                         error={errors.name}
                         id="outlined-error-helper-text"
                         label="Camp Name"
@@ -106,7 +107,7 @@ export default function AddCampaign() {
                     <label htmlFor="">Start Date</label>
                     <TextField
                         className="txt"
-                       error={errors.startDate}
+                        error={errors.startDate}
                         id="outlined-error-helper-text"
                         // label="Camp Name"
                         helperText={errors.startDate}
@@ -117,7 +118,7 @@ export default function AddCampaign() {
                     <label htmlFor="">End Date</label>
                     <TextField
                         className="txt"
-                         error={errors.endDate}
+                        error={errors.endDate}
                         id="outlined-error-helper-text"
                         helperText={errors.endDate}
                         variant="outlined"
@@ -127,13 +128,13 @@ export default function AddCampaign() {
                         onChange={(e) => handleChange('endDate', e.target.value)} />
                     <TextField
                         className="txt"
-                       error={errors.Budget}
+                        error={errors.Budget}
                         id="outlined-error-helper-text"
                         helperText={errors.Budget}
                         label="Camp Budget"
                         variant="outlined"
                         type="number"
-                        placeholder="Enter Campaign name"
+                        placeholder="Enter Budget"
                         value={formData.Budget}
                         onChange={(e) => handleChange('Budget', e.target.value)}
                     />
@@ -148,22 +149,23 @@ export default function AddCampaign() {
                         onChange={(e) => handleChange('userId', e.target.value)}
                     />
                 </div>
-                <Link to="/">
+                <div >
+                    <Link to="/">
+                        <Button
+                            variant="outlined"
+                            color="error"
+                            type='button' >
+                            Cancel
+                        </Button>
+                    </Link>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
                     <Button
-                        variant="outlined"
-                        color="error"
-                        type='button' >
-                        Cancel
+                        variant="contained"
+                        color="success"
+                        type="submit">
+                        Add Campaign
                     </Button>
-                </Link>
-
-                <Button
-                    variant="contained"
-                    color="success"
-                    type="submit">
-                    Add Campaign
-                </Button>
-
+                </div>
             </form>
         </div>
     )

@@ -11,6 +11,7 @@ th {
 
     display: flex;
     gap: 1rem;
+    align-content: right;
 }
 .dot-red{
     height: 10px;
@@ -45,6 +46,7 @@ height: 10px;
 
 .change-page{
     display: flex;
+   margin-left: 36%;
     gap: 2rem;
     padding: 1.5rem 2rem;
     

@@ -53,6 +53,7 @@ export default function List() {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
 
+    console.log("start date:",startDateFilter,"   ",endDateFilter)
     //reseting current page to 1 whenever filter changes
     useEffect(() => {
         setCurrentPage(1);
@@ -71,7 +72,6 @@ export default function List() {
         //date range filter - shows campaigns if it fall between the range
         if (startDateFilter) {
             const filterStart = new Date(startDateFilter);
-
             //applying endDate filter if it is >= startdate
             if (endDateFilter) {
                 const filterEnd = new Date(endDateFilter);
@@ -103,6 +103,7 @@ export default function List() {
             })
         }
 
+        
         return filteredList;
 
     }, [campaigns, nameFilter, startDateFilter, endDateFilter]);
@@ -153,7 +154,7 @@ export default function List() {
               <TableCell align="right">{getUserName(camp.userId)}</TableCell>
               <TableCell align="right">{camp.startDate}</TableCell>
               <TableCell align="right">{camp.endDate}</TableCell>
-              <TableCell align="right">
+              <TableCell >
                 <div className="status">
                                             <div className={active ? 'dot-green' : 'dot-red'}></div>
                                             <span className={active ? 'green' : 'red'}>

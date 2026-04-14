@@ -23,5 +23,7 @@ label {
 }
 
 .input-field .txt{
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  width: 150%;
 }
+
