@@ -1,12 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCampaigns } from "../store/campaignSlice";
 import './AddCampaign.css'
+import Button from "@mui/material/Button";
 
-export default function AddCampaign({ onClose }) {
+import TextField from "@mui/material/TextField";
+import { Link, useNavigate } from "react-router-dom";
+
+
+export default function AddCampaign() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const campaigns = useSelector(state => state.campaigns.items);
-    const users = useSelector(state => state.users.items)
+
 
     const [formData, setFormData] = useState({
         name: '',
@@ -47,9 +53,6 @@ export default function AddCampaign({ onClose }) {
         if (!formData.Budget || Number(formData.Budget) <= 0) {
             newErrors.Budget = 'Budget Must be zero or more'
         }
-        // if (!formData.userId) {
-        //     newErrors.userId = 'Please select  user id'
-        // }
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -80,74 +83,87 @@ export default function AddCampaign({ onClose }) {
         }
 
         dispatch(addCampaigns([newCampaign]));
-        onClose();
+        navigate("/")
 
     };
 
-   
+
     return (
-        <div>
+        <div className="add-container">
             <h1>Add Campaign</h1>
-            <button onClick={onClose}>&times;</button>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="camp-name">Camp Name</label>
-                    <input
-                        id="camp-name"
+                <div className="input-field">
+                    <TextField
+                        error={errors.name}
+                        id="outlined-error-helper-text"
+                        label="Camp Name"
+                        helperText={errors.name}
                         type="text"
                         placeholder="Enter Campaign name"
                         value={formData.name}
                         onChange={(e) => handleChange('name', e.target.value)}
                     />
-                    {errors.name && <span>{errors.name}</span>}
-                </div>
-                <div>
-                    <label htmlFor="camp-start">Start Date</label>
-                    <input
-                        id="camp-start"
+                    <label htmlFor="">Start Date</label>
+                    <TextField
+                        className="txt"
+                       error={errors.startDate}
+                        id="outlined-error-helper-text"
+                        // label="Camp Name"
+                        helperText={errors.startDate}
+                        variant="outlined"
                         type="date"
                         value={formData.startDate}
-                        onChange={(e) => handleChange('startDate', e.target.value)}
-                    />
-                    {errors.startDate && <span>{errors.startDate}</span>}
-                </div>
-                <div>
-                    <label htmlFor="camp-end">End date</label>
-                    <input
-                        id="camp-end"
+                        onChange={(e) => handleChange('startDate', e.target.value)} />
+                    <label htmlFor="">End Date</label>
+                    <TextField
+                        className="txt"
+                         error={errors.endDate}
+                        id="outlined-error-helper-text"
+                        helperText={errors.endDate}
+                        variant="outlined"
                         type="date"
 
                         value={formData.endDate}
-                        onChange={(e) => handleChange('endDate', e.target.value)}
-                    />
-                    {errors.endDate && <span>{errors.endDate}</span>}
-                </div>
-                <div>
-                    <label htmlFor="camp-budget">Camp Budget</label>
-                    <input
-                        id="camp-budget"
+                        onChange={(e) => handleChange('endDate', e.target.value)} />
+                    <TextField
+                        className="txt"
+                       error={errors.Budget}
+                        id="outlined-error-helper-text"
+                        helperText={errors.Budget}
+                        label="Camp Budget"
+                        variant="outlined"
                         type="number"
-
                         placeholder="Enter Campaign name"
                         value={formData.Budget}
                         onChange={(e) => handleChange('Budget', e.target.value)}
                     />
-                    {errors.Budget && <span>{errors.Budget}</span>}
-                </div>
-                <div>
-                    <label htmlFor="camp-user">User Name</label>
-                    <input
-                        id="user-name"
+                    <TextField
+                        className="txt"
+                        id="outlined-basic"
+                        label="User Id"
+                        variant="outlined"
                         type="number"
                         placeholder="Enter User Id"
                         value={formData.userId}
-                         onChange={(e) => handleChange('userId', e.target.value)}
-                   
+                        onChange={(e) => handleChange('userId', e.target.value)}
                     />
-                    {errors.userId && <span>{errors.userId}</span>}
                 </div>
-                <button type='button' onClick={onClose}>Cancel</button>
-                <button type="submit">Add Campaign</button>
+                <Link to="/">
+                    <Button
+                        variant="outlined"
+                        color="error"
+                        type='button' >
+                        Cancel
+                    </Button>
+                </Link>
+
+                <Button
+                    variant="contained"
+                    color="success"
+                    type="submit">
+                    Add Campaign
+                </Button>
+
             </form>
         </div>
     )

@@ -1,3 +1,10 @@
+.add-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
 label {
   font-size: 0.8rem;
   width: 100%;
@@ -7,11 +14,14 @@ label {
   letter-spacing: 0.5px;
 }
 
-input{
-  width: 30%;
-  padding: 0.65rem 0.85rem;
-  border: 1px solid #3d4155;
-  border-radius: 6px;
-  background-color: #1e2130;
+.input-field{
+ display: flex;
+ flex-direction: column;
+ /* width: 50%; */
+/* align-items: center; */
+/* /margin-bottom: 2px; */
+}
 
+.input-field .txt{
+  margin-bottom: 10px;
 }

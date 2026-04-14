@@ -1,42 +1,46 @@
 import Search from "./components/Search";
 import List from "./components/List";
-import { useEffect,useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "./store/usersSlice";
-import AddCampaign from "./components/AddCampaign";
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
-export default function App(){
+export default function App() {
   const dispatch = useDispatch();
   const usersStatus = useSelector(state => state.users.status);
   const usersError = useSelector(state => state.users.error);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() =>{
-    if(usersStatus === 'idle'){
+  useEffect(() => {
+    if (usersStatus === 'idle') {
       dispatch(fetchUsers());
     }
-  },[dispatch,usersStatus]);
+  }, [dispatch, usersStatus]);
 
 
   return (
     <div>
       <div>
-    <h1>
-      Campaign List
-    </h1>
-    <button onClick={() => setIsModalOpen(true)}>Add Campaign</button>
-    </div>
-    <Search />
-    {usersStatus === 'loadig' && (
-      <p className="">Loading user data....</p>
-    )}
-    {usersStatus === 'failed' && (
-      <p className="">Failed to load user data: {usersError}</p>
-    )}
-    <List />
-    {isModalOpen && (
-      <AddCampaign onClose={() => setIsModalOpen(false)} />
-    )}
+        <h1>
+          Campaign List
+        </h1>
+        <Link to="/add">
+          <Button
+            variant="contained"
+
+          >
+            Add Campaign
+          </Button>
+        </Link>
+      </div>
+      <Search />
+      {usersStatus === 'loadig' && (
+        <p className="">Loading user data....</p>
+      )}
+      {usersStatus === 'failed' && (
+        <p className="">Failed to load user data: {usersError}</p>
+      )}
+      <List />
     </div>
   )
 }

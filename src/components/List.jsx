@@ -2,6 +2,19 @@ import { useSelector } from "react-redux"
 import { CAMPAIGN_DATA } from "../../data"
 import './list.css'
 import { useMemo, useState, useEffect } from "react";
+import Button from "@mui/material/Button";  
+
+
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+
 
 
 //format function for budget as USD
@@ -107,73 +120,73 @@ export default function List() {
 
 
     return (
-        <>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Campaign Name</th>
-                        <th>User Name</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Active</th>
-                        <th>Budget</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* {filteredCampaigns.length === 0 ? ( */}
-                    {paginatedCampaigns.length === 0 ? (
-                        <tr key='empty-list'>
-                            <td colSpan='6' style={{ textAlign: 'center' }}>
-                                No Campaigns Found
-                            </td>
-                        </tr>
-                    ) : (
-                        // filteredCampaigns.map(camp => {
-                        paginatedCampaigns.map(camp => {
-                            const active = isActive(camp.startDate, camp.endDate);
-                            return (
-                                <tr key={camp.id}>
-                                    <td>{camp.name}</td>
-                                    <td>{getUserName(camp.userId)}</td>
-                                    <td>{camp.startDate}</td>
-                                    <td>{camp.endDate}</td>
-                                    <td>
-                                        <div>
-                                            <div className={active ? 'status-dot green' : 'status-dot red'}></div>
-                                            <span className={active ? 'status-text green' : 'status-text red'}>
+        <div className="container">
+            <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Campaign name</TableCell>
+            <TableCell align="right">User Name</TableCell>
+            <TableCell align="right">Start Date</TableCell>
+            <TableCell align="right">End date</TableCell>
+            <TableCell align="right">Active</TableCell>
+            <TableCell align="right">Budget</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {paginatedCampaigns.length === 0 ? (
+            <TableRow
+            key="empty-list">
+                <TableCell> No Campaign Found</TableCell>
+            </TableRow>
+          ):(
+            paginatedCampaigns.map(camp => {
+                const active = isActive(camp.startDate,camp.endDate);
+                return(
+            <TableRow
+              key={camp.id}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell >
+                {camp.name}
+              </TableCell>
+              <TableCell align="right">{getUserName(camp.userId)}</TableCell>
+              <TableCell align="right">{camp.startDate}</TableCell>
+              <TableCell align="right">{camp.endDate}</TableCell>
+              <TableCell align="right">
+                <div className="status">
+                                            <div className={active ? 'dot-green' : 'dot-red'}></div>
+                                            <span className={active ? 'green' : 'red'}>
                                                 {active ? 'Active' : 'Inactive'}
                                             </span>
                                         </div>
 
-                                    </td>
-                                    <td>{formatUSD(camp.Budget)}</td>
-                                </tr>
-                            )
-                        })
-                    )
-                    }
-
-                </tbody>
-            </table>
+              </TableCell>
+              <TableCell align="right">{formatUSD(camp.Budget)}</TableCell>
+            </TableRow>
+          )}))}
+        </TableBody>
+      </Table>
+    </TableContainer>
 
             {filteredCampaigns.length > 0 && (
-                <div>
-                    <button
+                <div className="change-page"> 
+                    <Button variant="contained"
                     onClick={() => setCurrentPage(prev => Math.max(prev-1,1))}
                     disabled={currentPage === 1}
                     >
                         Previous
-                    </button>
+                    </Button>
                     <span>Page {currentPage} of {totalPages}</span>
-                    <button
+                    <Button variant="contained"
                     onClick={() => setCurrentPage(prev => Math.min(prev+1,totalPages))}
                     disabled={currentPage === totalPages}
                     >
                         Next
-                    </button>
+                    </Button>
                 </div>
             )}
 
-        </>
+        </div>
     )
 }

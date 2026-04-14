@@ -9,19 +9,20 @@ export default function Search() {
     const startDate = useSelector(state => state.filters.startDate);
     const endDate = useSelector(state => state.filters.endDate);
 
-    const [searchText , setSearchText] = useState('');
+    const [searchText, setSearchText] = useState('');
 
     const debounedSearch = useDebounce(searchText);
 
     useEffect(() => {
         dispatch(changeName(debounedSearch));
-    },[debounedSearch,dispatch])
+    }, [debounedSearch, dispatch])
 
     const isDateError = startDate && endDate && new Date(endDate) < new Date(startDate);
 
     return (
         <div className='search-container'>
             <div className='search-field'>
+
                 <input
                     id='filter-start'
                     type="date"
@@ -40,6 +41,7 @@ export default function Search() {
                 />
             </div>
             <div className='search-field'>
+               
                 <input
                     id='search-name'
                     type="text"
