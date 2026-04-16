@@ -36,12 +36,12 @@ export default function Search() {
                     id='filter-end'
                     type="date"
                     className={`search-input ${isDateError ? 'input-error' : ''}`}
-
+                    disabled={startDate === null}
                     onChange={(event) => dispatch(changeEndDate(event.target.value))}
                 />
             </div>
             <div className='search-field'>
-               
+
                 <input
                     id='search-name'
                     type="text"

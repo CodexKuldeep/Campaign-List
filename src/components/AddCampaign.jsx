@@ -159,7 +159,6 @@ export default function AddCampaign({ onClose }) {
                         />
                     </div>
                     <div >
-                        {/* <Link to="/"> */}
                         <Button
                             variant="outlined"
                             color="error"
@@ -167,7 +166,6 @@ export default function AddCampaign({ onClose }) {
                             onClick={onClose}>
                             Cancel
                         </Button>
-                        {/* </Link> */}
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <Button
                             variant="contained"

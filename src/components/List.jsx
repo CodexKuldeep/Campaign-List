@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { CAMPAIGN_DATA } from "../../data"
 import './list.css'
 import { useMemo, useState, useEffect } from "react";
-import Button from "@mui/material/Button";  
+import Button from "@mui/material/Button";
 
 
 
@@ -53,7 +53,7 @@ export default function List() {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
 
-    console.log("start date:",startDateFilter,"   ",endDateFilter)
+    
     //reseting current page to 1 whenever filter changes
     useEffect(() => {
         setCurrentPage(1);
@@ -84,7 +84,10 @@ export default function List() {
                         //campaig end after filter start and campaign starts before filter ends
                         return campEnd >= filterStart && campStart <= filterEnd
                     });
+                }else {
+                    filteredList = [];
                 }
+
             } else {
                 //only start date, shows campaign that ends on or after this date
                 filteredList = filteredList.filter(camp => {
@@ -103,7 +106,7 @@ export default function List() {
             })
         }
 
-        
+
         return filteredList;
 
     }, [campaigns, nameFilter, startDateFilter, endDateFilter]);
@@ -123,65 +126,66 @@ export default function List() {
     return (
         <div className="container">
             <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow >
-            <TableCell ><span className="head" >Campaign name</span></TableCell>
-            <TableCell align="right"><span className="head" >User Name</span></TableCell>
-            <TableCell align="right"><span className="head" >Start Date</span></TableCell>
-            <TableCell align="right"><span className="head" >End date</span></TableCell>
-            <TableCell align="right"><span className="head" >Active</span></TableCell>
-            <TableCell align="right"><span className="head" >Budget</span></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {paginatedCampaigns.length === 0 ? (
-            <TableRow
-            key="empty-list">
-                <TableCell> No Campaign Found</TableCell>
-            </TableRow>
-          ):(
-            paginatedCampaigns.map(camp => {
-                const active = isActive(camp.startDate,camp.endDate);
-                return(
-            <TableRow
-              key={camp.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell >
-                {camp.name}
-              </TableCell>
-              <TableCell align="right">{getUserName(camp.userId)}</TableCell>
-              <TableCell align="right">{camp.startDate}</TableCell>
-              <TableCell align="right">{camp.endDate}</TableCell>
-              <TableCell >
-                <div className="status">
-                                            <div className={active ? 'dot-green' : 'dot-red'}></div>
-                                            <span className={active ? 'green' : 'red'}>
-                                                {active ? 'Active' : 'Inactive'}
-                                            </span>
-                                        </div>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow >
+                            <TableCell ><span className="head" >Campaign name</span></TableCell>
+                            <TableCell align="right"><span className="head" >User Name</span></TableCell>
+                            <TableCell align="right"><span className="head" >Start Date</span></TableCell>
+                            <TableCell align="right"><span className="head" >End date</span></TableCell>
+                            <TableCell align="right"><span className="head" >Active</span></TableCell>
+                            <TableCell align="right"><span className="head" >Budget</span></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {paginatedCampaigns.length === 0 ? (
+                            <TableRow
+                                key="empty-list">
+                                <TableCell> No Campaign Found</TableCell>
+                            </TableRow>
+                        ) : (
+                            paginatedCampaigns.map(camp => {
+                                const active = isActive(camp.startDate, camp.endDate);
+                                return (
+                                    <TableRow
+                                        key={camp.id}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell >
+                                            {camp.name}
+                                        </TableCell>
+                                        <TableCell align="right">{getUserName(camp.userId)}</TableCell>
+                                        <TableCell align="right">{camp.startDate}</TableCell>
+                                        <TableCell align="right">{camp.endDate}</TableCell>
+                                        <TableCell >
+                                            <div className="status">
+                                                <div className={active ? 'dot-green' : 'dot-red'}></div>
+                                                <span className={active ? 'green' : 'red'}>
+                                                    {active ? 'Active' : 'Inactive'}
+                                                </span>
+                                            </div>
 
-              </TableCell>
-              <TableCell align="right">{formatUSD(camp.Budget)}</TableCell>
-            </TableRow>
-          )}))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+                                        </TableCell>
+                                        <TableCell align="right">{formatUSD(camp.Budget)}</TableCell>
+                                    </TableRow>
+                                )
+                            }))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
 
             {filteredCampaigns.length > 0 && (
-                <div className="change-page"> 
+                <div className="change-page">
                     <Button variant="contained"
-                    onClick={() => setCurrentPage(prev => Math.max(prev-1,1))}
-                    disabled={currentPage === 1}
+                        onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                        disabled={currentPage === 1}
                     >
                         Previous
                     </Button>
                     <span>Page {currentPage} of {totalPages}</span>
                     <Button variant="contained"
-                    onClick={() => setCurrentPage(prev => Math.min(prev+1,totalPages))}
-                    disabled={currentPage === totalPages}
+                        onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                        disabled={currentPage === totalPages}
                     >
                         Next
                     </Button>
