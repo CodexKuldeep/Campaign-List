@@ -96,20 +96,13 @@ export default function List() {
                     return campStart >= filterStart;
                 })
             }
-        } else if (endDateFilter) {
-            //only end date -shows campagn that start on or before this date
-            const filterEnd = new Date(endDateFilter);
-            filteredList = filteredList.filter(camp => {
-                const campStart = dateParser(camp.startDate);
-                if (!campStart) return true;
-                return campStart <= filterEnd;
-            })
-        }
+        } 
 
 
         return filteredList;
 
     }, [campaigns, nameFilter, startDateFilter, endDateFilter]);
+    console.log("List")
 
     const paginatedCampaigns = useMemo(() => {
         const startIndex = (currentPage - 1) * itemsPerPage;
@@ -133,7 +126,7 @@ export default function List() {
                             <TableCell align="right"><span className="head" >User Name</span></TableCell>
                             <TableCell align="right"><span className="head" >Start Date</span></TableCell>
                             <TableCell align="right"><span className="head" >End date</span></TableCell>
-                            <TableCell align="right"><span className="head" >Active</span></TableCell>
+                            <TableCell align="center"><span className="head" >Active</span></TableCell>
                             <TableCell align="right"><span className="head" >Budget</span></TableCell>
                         </TableRow>
                     </TableHead>

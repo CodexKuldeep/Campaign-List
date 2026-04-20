@@ -15,17 +15,20 @@ th {
 
     display: flex;
     gap: 1rem;
-    align-content: right;
+    justify-content: center;
 }
 .dot-red{
     height: 10px;
     width: 10px;
+    display: flex;
+    margin-top: 4px;
     border-radius: 50%;
     background-color: red;
 }
 .dot-green{
     height: 10px;
     width: 10px;
+    margin-top: 4px;
     border-radius: 50%;
     background-color: green;
 }
