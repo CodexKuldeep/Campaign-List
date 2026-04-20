@@ -82,7 +82,7 @@ export default function List() {
                         const campEnd = dateParser(camp.endDate);
                         if (!campEnd || !campStart) return true;
                         //campaig end after filter start and campaign starts before filter ends
-                        return campEnd >= filterStart && campStart <= filterEnd
+                        return campEnd <= filterEnd && campStart >= filterStart
                     });
                 }else {
                     filteredList = [];
@@ -91,9 +91,9 @@ export default function List() {
             } else {
                 //only start date, shows campaign that ends on or after this date
                 filteredList = filteredList.filter(camp => {
-                    const campEnd = dateParser(camp.endDate);
-                    if (!campEnd) return true;
-                    return campEnd >= filterStart;
+                    const campStart = dateParser(camp.startDate);
+                    if (!campStart) return true;
+                    return campStart >= filterStart;
                 })
             }
         } else if (endDateFilter) {
